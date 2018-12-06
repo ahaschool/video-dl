@@ -1,0 +1,31 @@
+{
+    "name": "ahaschool/video-dl",
+    "description": "ahaschool download video for php",
+    "license": "MIT",
+    "homepage": "https://www.ahaschool.com",
+    "keywords": ["ahaschool", "video-dl", "youtube"],
+    "support": {
+        "issues": "https://github.com/ahaschool/video-dl/issues",
+        "source": "https://github.com/ahaschool/video-dl"
+    },
+    "require": {
+        "php": ">=5.4",
+        "norkunas/youtube-dl-php": "^0.3.5",
+        "guzzlehttp/guzzle": "^6.3"
+    },
+    "authors": [
+        {
+            "name": "zfuming",
+            "email": "zfm@ifucloud.com"
+        }
+    ],
+    "require-dev": {
+        "phpunit/phpunit": "~4.5"
+    },
+    "autoload": {
+        "psr-4": { "Ahaschool\\Videodl\\": "src/" }
+    },
+    "scripts": {
+        "post-package-install": "chmod +x bin/youtube-dl"
+    }
+}
