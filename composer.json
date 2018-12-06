@@ -10,7 +10,7 @@
     },
     "require": {
         "php": ">=5.4",
-        "norkunas/youtube-dl-php": "^0.3.5",
+        "norkunas/youtube-dl-php": "^1.0",
         "guzzlehttp/guzzle": "^6.3"
     },
     "authors": [
