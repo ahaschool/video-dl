@@ -71,40 +71,6 @@ class Channel {
     }
 
     /**
-     * 保存数据
-     */
-    public function saveItemsToDB()
-    {
-        $pdo = new \PDO('mysql:host=test3;dbname=vdl', 'hjm_dev', 'hjm_dev');
-        $stmt = $pdo->prepare("SELECT * FROM `channel` WHERE `url` = :url");
-        $stmt->execute([':url' => $this->channel]);
-        if (!$channel = $stmt->fetch()) {
-            $stmt = $pdo->prepare("INSERT INTO `channel` (`title`,`url`) VALUES (:title,:url)");
-            $stmt->execute([':title' => 'testtest', ':url' => $this->channel]);
-            $stmt = $pdo->prepare("SELECT * FROM `channel` WHERE `url` = :url");
-            $stmt->execute([':url' => $this->channel]);
-            $channel = $stmt->fetch();
-        }
-        $stmt = $pdo->prepare("DELETE FROM `video` WHERE `channel_id` = :channel_id");
-        $stmt->execute([':channel_id' => $channel['id']]);
-        foreach ($this->items as $item) {
-            $stmt = $pdo->prepare("INSERT INTO `video` (`channel_id`,`video_url`,`title`,`description`,`view_count`,`like_count`,`dislike_count`,`file_name`,`publish_at`) VALUES (:channel_id,:video_url,:title,:description,:view_count,:like_count,:dislike_count,:file_name,:publish_at)");
-            $stmt->execute([
-                ':channel_id' => $channel['id'],
-                ':video_url' => $item,
-                ':title' => '',
-                ':description' => '',
-                ':view_count' => 0,
-                ':like_count' => 0,
-                ':dislike_count' => 0,
-                ':file_name' => '',
-                ':publish_at' => '',
-            ]);
-        }
-        $pdo = null;
-    }
-
-    /**
      * 循环获取视频地址
      * @param bool $is_ajax
      * @param string $url
