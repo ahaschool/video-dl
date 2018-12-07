@@ -3,6 +3,13 @@ install the wrapper using [Composer](http://getcomposer.org/):
 ```
 composer require ahaschool/video-dl
 ```
+Add composer script at your root composer.josn
+```
+"scripts": {
+    ...
+    "post-install-cmd": "chmod +x vendor/ahaschool/video-dl/bin/youtube-dl"
+ }
+```
 
 ## Get youtube video url list
 ```php
