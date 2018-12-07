@@ -18,7 +18,7 @@ class Channel {
 
     /**
      * http 请求类
-     * @var null
+     * @var null | \GuzzleHttp\Client
      */
     private $http = null;
 
@@ -53,6 +53,33 @@ class Channel {
     }
 
     /**
+     * 获取频道的hash值
+     * @return string
+     */
+    public function getChannelHash()
+    {
+        return hash('sha1', $this->channel);
+    }
+
+    /**
+     * 获取频道url
+     * @return string
+     */
+    public function getChannelUrl()
+    {
+        return self::BASE_URL . $this->channel;
+    }
+
+    /**
+     * 获取频道
+     * @return string
+     */
+    public function getChannel()
+    {
+        return $this->channel;
+    }
+
+    /**
      * 抓取视频信息
      * @return $this
      */
@@ -78,7 +105,7 @@ class Channel {
     private function loopGetVideoData($is_ajax = false, $url = '')
     {
         if (!$is_ajax) {
-            $res = $this->http->get(self::BASE_URL . $this->channel);
+            $res = $this->http->get($this->getChannelUrl());
             $content = $res->getBody()->getContents();
             preg_match('/gridRenderer\":\{\"items\":(.*?),\"continuations/', $content, $match);
             $items = isset($match[1]) ? json_decode($match[1], true) : [];
