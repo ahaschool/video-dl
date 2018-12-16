@@ -30,13 +30,11 @@ class Download
      * 初始化函数
      * Download constructor.
      * @param $path
+     * @param array $init
      */
-    public function __construct($path)
+    public function __construct($path, $init = ['continue' => true, 'format' => 'bestvideo'])
     {
-        $this->YoutubeDl = new YoutubeDl([
-            'continue' => true, // force resume of partially downloaded files. By default, youtube-dl will resume downloads if possible.
-            'format' => 'bestvideo',
-        ]);
+        $this->YoutubeDl = new YoutubeDl($init);
         $this->YoutubeDl->setBinPath(self::YTB_DL_CMD_PATH);
         $this->YoutubeDl->setDownloadPath($path);
     }
